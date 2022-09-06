@@ -11,13 +11,24 @@ const MOVIES_INITIAL_STATE = {
 const moviesReducer = (state, action) => {
   switch (action.type) {
     case MOVIES_ACTIONS.START_SEARCH: {
-      return;
+      return {
+        ...state,
+        loading: true,
+      };
     }
     case MOVIES_ACTIONS.MOVIES_SEARCH_SUCCESS: {
-      return;
+      return {
+        ...state,
+        movies: action.movies,
+        loading: false,
+        totalPage: action.totalPage,
+      };
     }
     case MOVIES_ACTIONS.MOVIES_SEARCH_ERROR: {
-      return;
+      return {
+        ...state,
+        error: action.error,
+      };
     }
     default:
       return state;

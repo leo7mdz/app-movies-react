@@ -1,17 +1,21 @@
-import { useEffect, useReducer } from "react";
-import moviesReducer, { MOVIES_INITIAL_STATE } from "./reducer/moviesReducer";
-import apiFetch from "./utils/apiFetch";
+import useMoviesSearch from "./hooks/useMoviesSearch";
 
 function App() {
-  const [movies, moviesDispatch] = useReducer(
-    moviesReducer,
-    MOVIES_INITIAL_STATE
-  );
-  useEffect(() => {
-    apiFetch("/movie/popular", 12);
-  }, []);
+  const { movies, page, totalPage, loading } = useMoviesSearch();
+  console.log(movies, page, totalPage, loading);
 
-  return <div>hola</div>;
+  if (!movies) return;
+  return (
+    <div>
+      {movies.map((movie) => (
+        <p key={movie.id}>{movie.title}</p>
+      ))}
+
+      <p>
+        Pagina <b>{page}</b> de <b>{totalPage}</b>
+      </p>
+    </div>
+  );
 }
 
 export default App;
