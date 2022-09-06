@@ -43,6 +43,10 @@ const useMoviesSearch = () => {
     moviesDispatch({ type: MOVIES_ACTIONS.MOVIES_SEARCH_ERROR, error });
   };
 
+  const setPage = (page) => {
+    moviesDispatch({ type: MOVIES_ACTIONS.MOVIES_SETPAGE, page });
+  };
+
   useEffect(() => {
     searchMovies(
       "/movie/popular",
@@ -55,6 +59,7 @@ const useMoviesSearch = () => {
 
   return {
     ...moviesSearch,
+    setPage,
   };
 };
 

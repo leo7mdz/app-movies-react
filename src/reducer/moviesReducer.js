@@ -30,6 +30,12 @@ const moviesReducer = (state, action) => {
         error: action.error,
       };
     }
+    case MOVIES_ACTIONS.MOVIES_SETPAGE: {
+      return {
+        ...state,
+        page: action.page,
+      };
+    }
     default:
       return state;
   }

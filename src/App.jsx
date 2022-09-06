@@ -1,19 +1,17 @@
+import Pagination from "./components/Pagination";
 import useMoviesSearch from "./hooks/useMoviesSearch";
 
 function App() {
-  const { movies, page, totalPage, loading } = useMoviesSearch();
-  console.log(movies, page, totalPage, loading);
+  const { movies, page, totalPage, loading, setPage } = useMoviesSearch();
+  console.log(loading);
 
   if (!movies) return;
   return (
     <div>
+      <Pagination setPage={setPage} page={page} totalPage={totalPage} />
       {movies.map((movie) => (
         <p key={movie.id}>{movie.title}</p>
       ))}
-
-      <p>
-        Pagina <b>{page}</b> de <b>{totalPage}</b>
-      </p>
     </div>
   );
 }
