@@ -15,10 +15,9 @@ const searchMovies = async (
   const { success, data, statusCode } = await apiFetch(endpoint, page);
 
   if (success) {
-    searchSuccess(data.results, data.total_pages);
+    return searchSuccess(data.results, data.total_pages);
   }
-
-  searchError(`Error:${statusCode}`);
+  return searchError(`Error:${statusCode}`);
 };
 
 const useMoviesSearch = () => {

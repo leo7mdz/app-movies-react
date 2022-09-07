@@ -1,18 +1,15 @@
+import GridCards from "./components/GridCards";
 import Pagination from "./components/Pagination";
-import useMoviesSearch from "./hooks/useMoviesSearch";
+import MoviesProvider from "./context/MoviesContext";
 
 function App() {
-  const { movies, page, totalPage, loading, setPage } = useMoviesSearch();
-  console.log(loading);
-
-  if (!movies) return;
   return (
-    <div>
-      <Pagination setPage={setPage} page={page} totalPage={totalPage} />
-      {movies.map((movie) => (
-        <p key={movie.id}>{movie.title}</p>
-      ))}
-    </div>
+    <MoviesProvider>
+      <div>
+        <Pagination />
+        <GridCards />
+      </div>
+    </MoviesProvider>
   );
 }
 
