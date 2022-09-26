@@ -1,9 +1,4 @@
-import { useContext } from "react";
-import { MoviesContext } from "../context/MoviesContext";
-
-const Pagination = () => {
-  const { setPage, page, totalPage } = useContext(MoviesContext);
-
+const Pagination = ({ page, totalPage, setPage }) => {
   const isBackDisabled = page === 1;
 
   const isNextDisabled = page === totalPage;

@@ -1,4 +1,4 @@
-import MOVIES_ACTIONS from "../utils/actions";
+import MOVIES_ACTIONS from "../utils/movies-actions";
 
 const MOVIES_INITIAL_STATE = {
   movies: "",

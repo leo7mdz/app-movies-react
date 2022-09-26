@@ -1,15 +1,32 @@
-import GridCards from "./components/GridCards";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import GridCardsMovies from "./components/GridCards";
+import NavBar from "./components/NavBar";
 import Pagination from "./components/Pagination";
 import MoviesProvider from "./context/MoviesContext";
+import SeriesProvider from "./context/SeriesContext";
+import Details from "./pages/Details";
+import ErrorPage from "./pages/ErrorPage";
+import Home from "./pages/Home";
+import Series from "./pages/Series";
 
 function App() {
   return (
-    <MoviesProvider>
-      <div>
-        <Pagination />
-        <GridCards />
-      </div>
-    </MoviesProvider>
+    <BrowserRouter>
+      <MoviesProvider>
+        <SeriesProvider>
+          <div>
+            <NavBar />
+
+            <Routes>
+              <Route path="/" element={<Home types="movie" />} />
+              <Route path="/series" element={<Series types="tv" />} />
+              <Route path="*" element={<ErrorPage />} />
+              <Route path="/details/:type/:id" element={<Details />} />
+            </Routes>
+          </div>
+        </SeriesProvider>
+      </MoviesProvider>
+    </BrowserRouter>
   );
 }
 

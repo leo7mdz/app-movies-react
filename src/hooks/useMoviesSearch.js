@@ -1,10 +1,13 @@
 import { useEffect, useReducer } from "react";
 import moviesReducer, { MOVIES_INITIAL_STATE } from "../reducer/moviesReducer";
-import MOVIES_ACTIONS from "../utils/actions";
+import MOVIES_ACTIONS from "../utils/movies-actions";
 import apiFetch from "../utils/apiFetch";
+import { useSearchParams } from "react-router-dom";
+import { useDebounce } from "./useDebaunce";
 
 const searchMovies = async (
   endpoint,
+  search,
   page,
   startSearch,
   searchSuccess,
@@ -12,7 +15,7 @@ const searchMovies = async (
 ) => {
   startSearch();
 
-  const { success, data, statusCode } = await apiFetch(endpoint, page);
+  const { success, data, statusCode } = await apiFetch(endpoint, search, page);
 
   if (success) {
     return searchSuccess(data.results, data.total_pages);
@@ -25,6 +28,13 @@ const useMoviesSearch = () => {
     moviesReducer,
     MOVIES_INITIAL_STATE
   );
+
+  const [query] = useSearchParams();
+  const search = query.get("search");
+
+  const debounce = useDebounce(search, 300);
+
+  const endpoint = search ? "/search/movie" : `/movie/popular`;
 
   const startSearch = () => {
     moviesDispatch({ type: MOVIES_ACTIONS.START_SEARCH });
@@ -48,13 +58,14 @@ const useMoviesSearch = () => {
 
   useEffect(() => {
     searchMovies(
-      "/movie/popular",
+      endpoint,
+      debounce,
       moviesSearch.page,
       startSearch,
       searchSuccess,
       searchError
     );
-  }, [moviesSearch.page]);
+  }, [moviesSearch.page, debounce]);
 
   return {
     ...moviesSearch,
