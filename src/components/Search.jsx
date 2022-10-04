@@ -1,7 +1,7 @@
 import React from "react";
-import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
 
+import { useSearchParams } from "react-router-dom";
+import style from "./search.module.css";
 const Search = () => {
   const [query, setQuery] = useSearchParams();
 
@@ -15,7 +15,7 @@ const Search = () => {
     setQuery({ search: e.target.value });
   };
   return (
-    <div>
+    <div className={style.search}>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -23,7 +23,6 @@ const Search = () => {
           value={search ?? ""}
           onChange={handleChange}
         />
-        <input type="submit" />
       </form>
     </div>
   );

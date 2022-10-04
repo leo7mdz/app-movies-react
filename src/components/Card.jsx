@@ -12,7 +12,7 @@ const Card = ({ title, overview, vote, image, id, types }) => {
   };
   return (
     <div onClick={handleCard} className={style.card}>
-      <img className={style.card} src={`${imagePath}${image}`} alt={title} />
+      <img src={`${imagePath}${image}`} alt={title} />
     </div>
   );
 };

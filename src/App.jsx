@@ -1,7 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import GridCardsMovies from "./components/GridCards";
+import "./app.css";
 import NavBar from "./components/NavBar";
-import Pagination from "./components/Pagination";
 import MoviesProvider from "./context/MoviesContext";
 import SeriesProvider from "./context/SeriesContext";
 import Details from "./pages/Details";
@@ -14,7 +13,7 @@ function App() {
     <BrowserRouter>
       <MoviesProvider>
         <SeriesProvider>
-          <div>
+          <div className="app">
             <NavBar />
 
             <Routes>

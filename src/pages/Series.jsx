@@ -10,7 +10,7 @@ const Series = ({ types }) => {
 
   return (
     <div>
-      <h2>Series</h2>
+      <h2 style={{ textAlign: "center" }}>Series</h2>
       <Search />
       <Pagination page={page} totalPage={totalPage} setPage={setPage} />
       <GridCards types={types} data={series} loading={loading} error={error} />

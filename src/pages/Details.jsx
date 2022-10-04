@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { IMG_PATH } from "../constants/api";
 import apiFetch from "../utils/apiFetch";
+import style from "../components/details.module.css";
 
 const Details = () => {
   const { type, id } = useParams();
@@ -30,14 +31,30 @@ const Details = () => {
 
   const sliceString = vote_average ? vote_average.toFixed(2) : "-";
 
+  const releaseData = release_date ? release_date : "Serie";
+
+  const bgImage = {
+    height: "100vh",
+    backgroundImage: `linear-gradient(rgba(0, 0, 0,.1),rgba(0,0,0,.2)), url(${IMG_PATH}/${backdrop_path})`,
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    backgroundPosition: "center top",
+    backgroundAttachment: "fixed",
+  };
+
   return (
-    <div>
-      <h2>{title || original_name}</h2>
-      <p>{overview}</p>
-      <img src={`${IMG_PATH}/${poster_path}`} alt={title} />
-      <img src={`${IMG_PATH}/${backdrop_path}`} alt={title} />
-      <p>fecha de estreno: {release_date}</p>
-      <p>Calificacion: {sliceString} %</p>
+    <div style={bgImage}>
+      <div className={style.container}>
+        <h2 className={style.title}>{title || original_name}</h2>
+        <p className={style.paragraph}>{overview}</p>
+        <img
+          className={style.imgPort}
+          src={`${IMG_PATH}/${poster_path}`}
+          alt={title}
+        />
+        <p className={style.premiere}>{releaseData}</p>
+        <p className={style.premiere}> {sliceString} %</p>
+      </div>
     </div>
   );
 };

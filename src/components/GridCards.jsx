@@ -1,25 +1,25 @@
-import { useContext } from "react";
-import { MoviesContext } from "../context/MoviesContext";
 import Card from "./Card";
 import styles from "./GridCard.module.css";
+import Loader from "./Loader";
 
-const GridCards = () => {
-  const { movies, loading, error } = useContext(MoviesContext);
+const GridCards = ({ types, data, error, loading }) => {
+  if (!loading && data.length === 0)
+    return <p>No se ah encontrado ningun resultado en la busqueda</p>;
 
-  if (!movies) return;
   return (
-    <div className={styles.card}>
-      {loading && <p>Cargando...</p>}
+    <div>
+      {loading && <Loader />}
       {error && <p>{error}</p>}
-      {movies.map((movie) => (
-        <Card
-          key={movie.id}
-          /* title={movie.title}
-          overview={movie.overview}
-          vote={movie.vote_overage} */
-          image={movie.poster_path}
-        />
-      ))}
+      <div className={styles.card}>
+        {data.map((date) => (
+          <Card
+            key={date.id}
+            image={date.poster_path}
+            id={date.id}
+            types={types}
+          />
+        ))}
+      </div>
     </div>
   );
 };

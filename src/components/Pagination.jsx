@@ -1,3 +1,5 @@
+import style from "./pagination.module.css";
+
 const Pagination = ({ page, totalPage, setPage }) => {
   const isBackDisabled = page === 1;
 
@@ -10,14 +12,22 @@ const Pagination = ({ page, totalPage, setPage }) => {
     setPage(page + 1);
   };
   return (
-    <div>
-      <button disabled={isBackDisabled} onClick={prevPage}>
+    <div className={style.pagination}>
+      <button
+        className={style.btn}
+        disabled={isBackDisabled}
+        onClick={prevPage}
+      >
         Anterior
       </button>
-      <span>
-        Pagina {page} de {totalPage}
+      <span className={style["pagination-text"]}>
+        Pagina <b>{page}</b> de {totalPage}
       </span>
-      <button disabled={isNextDisabled} onClick={nextPage}>
+      <button
+        className={style.btn}
+        disabled={isNextDisabled}
+        onClick={nextPage}
+      >
         Siguiente
       </button>
     </div>
