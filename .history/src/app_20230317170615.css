@@ -1,0 +1,41 @@
+/* .app {
+    margin: 0;
+    width: 100%;
+    min-height: 100%;
+} */
+
+
+.menu {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 1.2rem;
+
+}
+
+.menu li {
+
+    padding: 1rem .7rem;
+    font-weight: bold;
+}
+
+.menu span {
+    color: red;
+    margin-right: 1rem;
+    font-weight: bold;
+    font-size: 1.7rem;
+    padding-left: .5rem;
+}
+
+@media screen and (min-width:768px) {
+    .menu li {
+        padding: 1.3rem 1.8rem;
+    }
+
+    .menu span {
+        padding-left: 1.3rem;
+    }
+}
